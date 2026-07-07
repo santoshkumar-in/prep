@@ -1085,6 +1085,201 @@ A formal procedure for making decisions about population parameters based on sam
 
 ---
 
+### 1.1 Choosing $H_0$ and $H_1$ — A Complete Guide
+
+**a) The Golden Rules**
+
+Before any example, memorise these four rules:
+
+| Rule | Statement |
+|------|-----------|
+| **Rule 1** | $H_0$ is always the **status quo** — the default, the claim being tested, the "nothing changed" position |
+| **Rule 2** | $H_1$ is always what you are trying to **find evidence for** — the research claim, the suspicion, the change |
+| **Rule 3** | $H_0$ always contains **equality** ($=$ or $\leq$ or $\geq$). $H_1$ never contains equality |
+| **Rule 4** | The **burden of proof** is on $H_1$ — we only reject $H_0$ if evidence is overwhelming |
+
+---
+
+**b) The Three Possible Setups**
+
+$$\text{Two-sided: } H_0: \mu = \mu_0 \quad \text{vs} \quad H_1: \mu \neq \mu_0$$
+
+$$\text{Left-sided: } H_0: \mu \geq \mu_0 \quad \text{vs} \quad H_1: \mu < \mu_0$$
+
+$$\text{Right-sided: } H_0: \mu \leq \mu_0 \quad \text{vs} \quad H_1: \mu > \mu_0$$
+
+**How to choose which setup:** Ask yourself — "what would count as evidence against $H_0$?"
+- Evidence on **both sides** (too high OR too low) → two-sided
+- Evidence only on the **left** (suspecting a decrease) → left-sided
+- Evidence only on the **right** (suspecting an increase) → right-sided
+
+---
+
+**c) Step-by-Step Approach for Any Question**
+
+```
+Step 1: Identify the PARAMETER being tested (mean, variance, proportion)
+
+Step 2: Identify the CLAIMED value (this goes into H0)
+
+Step 3: Identify what you are TRYING TO PROVE (this goes into H1)
+
+Step 4: Ask — is the suspicion directional (one-sided) or non-directional (two-sided)?
+
+Step 5: Write H0 with equality, H1 without equality
+```
+
+---
+
+### Example 1 — Quality Control (Two-sided)
+
+**Question:** A machine fills packets with a target weight of 500g. An inspector suspects the machine is **not working correctly** (could be overfilling or underfilling). Set up the hypotheses.
+
+**Applying the steps:**
+
+- Parameter: mean fill weight $\mu$
+- Claimed value: 500g (the target — status quo)
+- Trying to prove: the machine is NOT filling at 500g
+- Directional? No — could be too high OR too low → **two-sided**
+
+$$H_0: \mu = 500 \quad \text{(machine is working correctly)}$$
+$$H_1: \mu \neq 500 \quad \text{(machine is NOT working correctly)}$$
+
+---
+
+### Example 2 — Drug Effectiveness (Right-sided)
+
+**Question:** A new drug claims to reduce recovery time. Current average recovery time is 10 days. A researcher suspects the drug **reduces** this. Set up the hypotheses.
+
+**Applying the steps:**
+
+- Parameter: mean recovery time $\mu$
+- Claimed value: 10 days (current standard)
+- Trying to prove: drug reduces time → $\mu < 10$
+- Directional? Yes — only a decrease matters → **left-sided**
+
+$$H_0: \mu \geq 10 \quad \text{(drug has no improvement or makes it worse)}$$
+$$H_1: \mu < 10 \quad \text{(drug reduces recovery time)}$$
+
+> **Why $H_0: \mu \geq 10$ and not $H_0: \mu = 10$?** Both are acceptable. In practice, $H_0: \mu = 10$ is used for computation (we test at the boundary), but conceptually $H_0: \mu \geq 10$ is more precise — we are ruling out ALL cases where the drug doesn't help.
+
+---
+
+### Example 3 — Manufacturing Claim (Right-sided)
+
+**Question:** A manufacturer claims their light bulbs last **at least 1000 hours**. A consumer group suspects the bulbs actually last **less than 1000 hours**. Set up the hypotheses.
+
+**Applying the steps:**
+
+- Parameter: mean bulb lifetime $\mu$
+- Manufacturer's claim: $\mu \geq 1000$ (this is the status quo / claim to test)
+- Consumer group trying to prove: $\mu < 1000$
+- Directional? Yes — only a decrease disproves the claim → **left-sided**
+
+$$H_0: \mu \geq 1000 \quad \text{(manufacturer's claim holds)}$$
+$$H_1: \mu < 1000 \quad \text{(manufacturer's claim is false)}$$
+
+---
+
+### Example 4 — Controller Performance (Two-sided)
+*(Exact style of Sample Paper Q20)*
+
+**Question:** A controller is set to maintain flow at 14 m³/s. Measurements are taken to verify performance. Determine whether the controller is working correctly.
+
+**Applying the steps:**
+
+- Parameter: mean flow rate $\mu$
+- Target value: 14 m³/s (the desired setting — status quo)
+- Trying to prove: the controller is NOT maintaining 14 m³/s (could be too high or too low)
+- Directional? No → **two-sided**
+
+$$H_0: \mu = 14 \quad \text{(controller performing correctly)}$$
+$$H_1: \mu \neq 14 \quad \text{(controller NOT performing correctly)}$$
+
+If we **fail to reject** $H_0$ → controller performance is good.
+If we **reject** $H_0$ → controller performance is bad.
+
+---
+
+### Example 5 — Comparing Two Groups (Two-sided)
+
+**Question:** Two teaching methods A and B are compared. A researcher wants to know if there is **any difference** in mean test scores. Set up the hypotheses.
+
+- Parameter: difference in means $\mu_A - \mu_B$
+- Status quo: no difference (methods are equally effective)
+- Trying to prove: some difference exists
+- Directional? No → **two-sided**
+
+$$H_0: \mu_A = \mu_B \quad \text{(no difference between methods)}$$
+$$H_1: \mu_A \neq \mu_B \quad \text{(methods differ)}$$
+
+---
+
+### Example 6 — Comparing Two Groups (One-sided)
+
+**Question:** Same setup, but the researcher specifically believes **Method B is better**. Set up the hypotheses.
+
+- Now directional — researcher suspects $\mu_B > \mu_A$, i.e., $\mu_A - \mu_B < 0$
+
+$$H_0: \mu_A \geq \mu_B \quad \text{(Method A is at least as good)}$$
+$$H_1: \mu_A < \mu_B \quad \text{(Method B is better)}$$
+
+---
+
+### Example 7 — Variance Comparison (F-test style)
+*(Style of Sample Paper Q37)*
+
+**Question:** Two production lines are claimed to have **equal variability**. An engineer suspects they differ. Set up the hypotheses.
+
+- Parameter: variances $\sigma_1^2$ and $\sigma_2^2$
+- Status quo: equal variances
+- Trying to prove: variances are different
+- Directional? No → **two-sided**
+
+$$H_0: \sigma_1^2 = \sigma_2^2$$
+$$H_1: \sigma_1^2 \neq \sigma_2^2$$
+
+---
+
+### Common Exam Traps
+
+| Trap | Wrong thinking | Correct thinking |
+|------|---------------|-----------------|
+| **Trap 1** | "The company claims quality is good, so $H_1$ is quality is good" | The company's claim goes in $H_0$ — it is the status quo being tested |
+| **Trap 2** | "$H_0$ can be $\mu \neq \mu_0$" | $H_0$ must always contain equality — never $\neq$ |
+| **Trap 3** | Rejecting $H_0$ proves $H_1$ is true | Rejecting $H_0$ only means the data provides strong evidence against $H_0$ — $H_1$ is not "proved" |
+| **Trap 4** | Failing to reject $H_0$ means $H_0$ is true | Failing to reject only means insufficient evidence against $H_0$ — it could still be false |
+| **Trap 5** | One-sided when question says "is different" | "Is different / has changed / is not equal" → always two-sided |
+
+---
+
+### Quick Decision Flowchart
+
+```
+What does the question ask?
+         │
+         ▼
+Is there a specific DIRECTION suspected?
+         │
+    ┌────┴────┐
+   YES        NO
+    │          │
+    ▼          ▼
+One-sided    Two-sided
+    │          │
+    ▼          ▼
+Suspecting    H1: μ ≠ μ0
+increase?
+    │
+  ┌─┴─┐
+ YES   NO
+  │     │
+  ▼     ▼
+H1:μ>μ0  H1:μ<μ0
+```
+
+---
+
 ### 2. Types of Errors ⭐
 
 | Decision\Truth         | $H_0$ True                | $H_0$ False                   |
