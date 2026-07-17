@@ -788,6 +788,31 @@ $$\text{Ridge: } \nabla(\|A\boldsymbol{\beta}-\mathbf{y}\|^2 + \lambda\|\boldsym
 | Why normalise features for GD        | Reduces condition number → faster convergence                       |
 | Ridge always invertible              | Because $(A^TA + \lambda I)$ has all eigenvalues $\geq \lambda > 0$ |
 
+
+## Remember — Strictly Convex → Unique Global Minimum ⭐⭐
+
+$$f \text{ strictly convex} \implies \text{at most ONE global minimum}$$
+
+| Type | Minima |
+|------|--------|
+| Strictly convex ($f''>0$) | Exactly one global minimum |
+| Convex ($f''\geq0$) | One or infinitely many (flat region) |
+| Non-convex | Multiple local minima possible |
+
+---
+
+## Remember — Operations That Preserve Convexity ⭐⭐⭐
+
+| Operation | Convex? | Example |
+|-----------|---------|---------|
+| $f + g$ (both convex) | **YES** ✓ | $x^2 + \|x\|$ |
+| $cf$ ($c > 0$, $f$ convex) | **YES** ✓ | $5x^2$ |
+| $\max(f, g)$ (both convex) | **YES** ✓ | $\max(x^2, e^x)$ |
+| $f(Ax+b)$ ($f$ convex) | **YES** ✓ | $\|Ax-b\|^2$ |
+| $f - g$ | **NOT always** ✗ | Need extra conditions |
+| $f \cdot g$ | **NOT always** ✗ | Need extra conditions |
+| $\min(f,g)$ | **NOT always** ✗ | Can create non-convex shape |
+
 ---
 
 _End of Optimization Notes_

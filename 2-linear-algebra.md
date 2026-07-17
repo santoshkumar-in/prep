@@ -210,7 +210,7 @@ For matrix $A$ (m×n, rank r):
 |------|----------|---------|
 | **Square** | m = n | Can have inverse |
 | **Symmetric** | $A = A^T$ | All eigenvalues real; eigenvectors orthogonal |
-| **Orthogonal** | $Q^TQ = I$ | $Q^{-1} = Q^T$; $\lvert\det(Q)\rvert = 1$; preserves lengths |
+| **Orthogonal** | $Q^TQ = I$ | $Q^{-1} = Q^T$; $\lvert\det(Q)\rvert = 1$; preserves lengths. EVal not always real |
 | **Diagonal** | Non-zero only on diagonal | Eigenvalues = diagonal entries |
 | **Idempotent** | $P^2 = P$ | Eigenvalues are 0 or 1 only; rank = trace |
 | **Positive Definite** | $\mathbf{x}^TA\mathbf{x} > 0 \ \forall\mathbf{x}\neq\mathbf{0}$ | All eigenvalues > 0; always invertible |

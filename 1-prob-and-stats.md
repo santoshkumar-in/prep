@@ -872,6 +872,7 @@ $$Z = \frac{X - \mu}{\sigma}$$
 - $\mu \pm \sigma$ contains ~68% of data
 - $\mu \pm 2\sigma$ contains ~95% of data
 - $\mu \pm 3\sigma$ contains ~99.7% of data
+- Mean = Median = Mode
 
 **Linear transformation:** If $X \sim N(\mu, \sigma^2)$, then $Y = aX + b \sim N(a\mu + b, a^2\sigma^2)$
 
@@ -1369,8 +1370,6 @@ $H_0: \sigma_1^2 = \sigma_2^2$ vs $H_1: \sigma_1^2 \neq \sigma_2^2$ (two-sided)
 **Test statistic:**
 $$F = \frac{s_1^2}{s_2^2} \sim F(n_1-1, n_2-1)$$
 
-**Decision:** Reject $H_0$ if $F < F_L$ or $F > F_U$ (two-sided critical values).
-
 **Example ⭐:**
 50 samples each: $s_1^2 = 2.05$, $s_2^2 = 7.64$
 $F = 2.05/7.64 = 0.27$
@@ -1406,7 +1405,34 @@ $$\bar{X} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}$$
 
 ---
 
-### 9. Examination Focus
+### 9. One Page Cheatsheet
+
+```
+STEP 1 — READ H₁
+  <  → Left-tailed
+  >  → Right-tailed
+  ≠  → Two-tailed
+
+STEP 2 — PICK TEST
+  σ known          → Z-test
+  σ unknown, n≤30  → T-test
+  σ unknown, n>30  → Z-test or T-test
+  Two variances     → F-test
+
+STEP 3 — DECIDE
+  p-value < α      → Reject H₀
+  p-value ≥ α      → Fail to Reject H₀
+
+  OR
+
+  Left:  T/Z < −critical  → Reject H₀
+  Right: T/Z > +critical  → Reject H₀
+  Two:  |T/Z| > critical  → Reject H₀
+```
+
+---
+
+### 10. Examination Focus
 
 - ⭐ Type I vs Type II error — definition and trade-off
 - ⭐ Z-test vs T-test — when to use which
@@ -1535,6 +1561,283 @@ $$\tau = \frac{\text{Concordant pairs} - \text{Discordant pairs}}{\frac{n(n-1)}{
 - **Key fact:** $r = 0$ does NOT mean no relationship
 
 ---
+## Correlation Coefficients — One Example Each
+
+---
+
+## PART 1 — PEARSON CORRELATION
+
+**Measures:** Linear association between two continuous variables.
+
+**Formula:**
+
+$$r = \frac{S_{XY}}{\sqrt{S_{XX} \cdot S_{YY}}}$$
+
+where:
+$$S_{XY} = \sum(x_i - \bar{x})(y_i - \bar{y}), \quad S_{XX} = \sum(x_i-\bar{x})^2, \quad S_{YY} = \sum(y_i-\bar{y})^2$$
+
+---
+
+### Example
+
+**Data:** Study hours vs exam score for 5 students.
+
+| Student | $x$ (hours) | $y$ (score) |
+|---------|------------|------------|
+| A | 1 | 40 |
+| B | 2 | 50 |
+| C | 3 | 60 |
+| D | 4 | 70 |
+| E | 5 | 80 |
+
+---
+
+**Step 1 — Compute means:**
+
+$$\bar{x} = \frac{1+2+3+4+5}{5} = 3, \quad \bar{y} = \frac{40+50+60+70+80}{5} = 60$$
+
+---
+
+**Step 2 — Build the calculation table:**
+
+| $x_i$ | $y_i$ | $x_i-\bar{x}$ | $y_i-\bar{y}$ | $(x_i-\bar{x})^2$ | $(y_i-\bar{y})^2$ | $(x_i-\bar{x})(y_i-\bar{y})$ |
+|--------|--------|----------------|----------------|--------------------|--------------------|-------------------------------|
+| 1 | 40 | $-2$ | $-20$ | 4 | 400 | 40 |
+| 2 | 50 | $-1$ | $-10$ | 1 | 100 | 10 |
+| 3 | 60 | $0$ | $0$ | 0 | 0 | 0 |
+| 4 | 70 | $1$ | $10$ | 1 | 100 | 10 |
+| 5 | 80 | $2$ | $20$ | 4 | 400 | 40 |
+| | | | **Sum** | **10** | **1000** | **100** |
+
+---
+
+**Step 3 — Apply formula:**
+
+$$S_{XX} = 10, \quad S_{YY} = 1000, \quad S_{XY} = 100$$
+
+$$r = \frac{100}{\sqrt{10 \times 1000}} = \frac{100}{\sqrt{10000}} = \frac{100}{100} = \boxed{1.0}$$
+
+---
+
+**Interpretation:** $r = 1.0$ — perfect positive linear relationship. Every extra hour of study adds exactly 10 marks. Makes sense since $y = 10x + 30$ exactly.
+
+---
+
+### Now Same Data But With an Outlier
+
+Change student E from $(5, 80)$ to $(5, 40)$:
+
+| Student | $x$ | $y$ |
+|---------|-----|-----|
+| A | 1 | 40 |
+| B | 2 | 50 |
+| C | 3 | 60 |
+| D | 4 | 70 |
+| **E** | **5** | **40** ← outlier |
+
+$\bar{x} = 3$, $\bar{y} = 52$
+
+| $x_i-\bar{x}$ | $y_i-\bar{y}$ | product |
+|----------------|----------------|---------|
+| $-2$ | $-12$ | 24 |
+| $-1$ | $-2$ | 2 |
+| $0$ | $8$ | 0 |
+| $1$ | $18$ | 18 |
+| $2$ | $-12$ | $-24$ |
+
+$S_{XY} = 24+2+0+18-24 = 20$
+
+$S_{XX} = 10$, $S_{YY} = 4+4+64+324+144 = 540$... wait:
+
+$(40-52)^2=144$, $(50-52)^2=4$, $(60-52)^2=64$, $(70-52)^2=324$, $(40-52)^2=144$
+
+$S_{YY} = 144+4+64+324+144 = 680$
+
+$$r = \frac{20}{\sqrt{10 \times 680}} = \frac{20}{\sqrt{6800}} = \frac{20}{82.46} \approx 0.24$$
+
+**One outlier dropped $r$ from 1.0 to 0.24** — showing Pearson is sensitive to outliers.
+
+---
+
+---
+
+## PART 2 — SPEARMAN RANK CORRELATION
+
+**Measures:** Monotone association (linear or non-linear) between ranked variables.
+
+**Formula:**
+
+$$r_s = 1 - \frac{6\sum d_i^2}{n(n^2-1)}$$
+
+where $d_i = R_1(x_i) - R_2(y_i)$ = difference in ranks.
+
+**When to use:** Ordinal data, non-linear monotone relationships, or when outliers are present.
+
+---
+
+### Example
+
+**Data:** Two judges rank 5 movies.
+
+| Movie | Judge 1 rank $R_1$ | Judge 2 rank $R_2$ |
+|-------|-------------------|-------------------|
+| A | 1 | 2 |
+| B | 2 | 1 |
+| C | 3 | 4 |
+| D | 4 | 3 |
+| E | 5 | 5 |
+
+---
+
+**Step 1 — Compute rank differences $d_i = R_1 - R_2$:**
+
+| Movie | $R_1$ | $R_2$ | $d_i = R_1-R_2$ | $d_i^2$ |
+|-------|--------|--------|------------------|---------|
+| A | 1 | 2 | $-1$ | 1 |
+| B | 2 | 1 | $+1$ | 1 |
+| C | 3 | 4 | $-1$ | 1 |
+| D | 4 | 3 | $+1$ | 1 |
+| E | 5 | 5 | $0$ | 0 |
+
+$$\sum d_i^2 = 1+1+1+1+0 = 4$$
+
+---
+
+**Step 2 — Apply formula:**
+
+$$r_s = 1 - \frac{6 \times 4}{5(25-1)} = 1 - \frac{24}{120} = 1 - 0.2 = \boxed{0.8}$$
+
+---
+
+**Interpretation:** $r_s = 0.8$ — strong agreement between judges. They mostly rank movies in the same order, with minor swaps (A↔B and C↔D).
+
+---
+
+### What If There Are Tied Ranks?
+
+If two observations have the same value, assign them the **average of the tied ranks**.
+
+Example: scores 70, 80, 80, 90 → ranks 1, 2.5, 2.5, 4
+
+$$\text{Both 80s get rank} = \frac{2+3}{2} = 2.5$$
+
+---
+
+---
+
+## PART 3 — KENDALL'S TAU
+
+**Measures:** Proportion of concordant vs discordant pairs.
+
+**Formula:**
+
+$$\tau = \frac{C - D}{\frac{1}{2}n(n-1)}$$
+
+where:
+- $C$ = number of **concordant** pairs
+- $D$ = number of **discordant** pairs
+- $\frac{1}{2}n(n-1)$ = total number of pairs
+
+---
+
+### Concordant vs Discordant — Definition
+
+For two observations $(x_i, y_i)$ and $(x_j, y_j)$:
+
+| Type | Condition | Meaning |
+|------|-----------|---------|
+| **Concordant** | $x_i > x_j$ AND $y_i > y_j$ OR $x_i < x_j$ AND $y_i < y_j$ | Both move in **same direction** |
+| **Discordant** | $x_i > x_j$ AND $y_i < y_j$ OR $x_i < x_j$ AND $y_i > y_j$ | Move in **opposite directions** |
+
+---
+
+### Example
+
+**Data:** 4 students — hours studied vs score.
+
+| Student | $x$ (hours) | $y$ (score) |
+|---------|------------|------------|
+| A | 1 | 50 |
+| B | 2 | 70 |
+| C | 3 | 65 |
+| D | 4 | 80 |
+
+---
+
+**Step 1 — List all pairs** (total pairs = $\frac{4\times3}{2} = 6$):
+
+| Pair | $x_i$ vs $x_j$ | $y_i$ vs $y_j$ | Type |
+|------|----------------|----------------|------|
+| (A,B) | $1 < 2$ | $50 < 70$ | **Concordant** ✓ |
+| (A,C) | $1 < 3$ | $50 < 65$ | **Concordant** ✓ |
+| (A,D) | $1 < 4$ | $50 < 80$ | **Concordant** ✓ |
+| (B,C) | $2 < 3$ | $70 > 65$ | **Discordant** ✗ |
+| (B,D) | $2 < 4$ | $70 < 80$ | **Concordant** ✓ |
+| (C,D) | $3 < 4$ | $65 < 80$ | **Concordant** ✓ |
+
+$C = 5$ (concordant), $D = 1$ (discordant)
+
+---
+
+**Step 2 — Apply formula:**
+
+$$\tau = \frac{C - D}{\frac{1}{2}n(n-1)} = \frac{5 - 1}{\frac{1}{2}(4)(3)} = \frac{4}{6} = \boxed{0.667}$$
+
+---
+
+**Interpretation:** $\tau = 0.667$ — moderate to strong positive association. Most pairs are concordant (both variables move together), with only one discordant pair (B vs C, where higher study hours led to lower score).
+
+---
+
+---
+
+## COMPARISON — All Three Methods on Same Data
+
+Using the original clean data (hours vs score, no outlier):
+
+| Method | Value | Measures |
+|--------|-------|---------|
+| Pearson $r$ | 1.0 | Linear association |
+| Spearman $r_s$ | 1.0 | Monotone rank association |
+| Kendall $\tau$ | 1.0 | Proportion of concordant pairs |
+
+All three agree on perfectly ordered data. They differ when:
+
+---
+
+## When They Disagree — Key Differences
+
+| Situation | Pearson | Spearman | Kendall |
+|-----------|---------|----------|---------|
+| Perfect linear relationship | 1.0 | 1.0 | 1.0 |
+| Non-linear but monotone ($y=x^2$, $x>0$) | High but $<1$ | 1.0 | 1.0 |
+| One outlier present | Drops sharply | Barely changes | Barely changes |
+| Ordinal data (Likert scale) | Inappropriate | **Use this** | **Or this** |
+| Small sample, few ties | OK | OK | **More reliable** |
+
+---
+
+## Which to Use — Decision Rule ⭐
+
+```
+Data is continuous and approximately normal?
+        ↓ YES
+    Use PEARSON
+
+Data is ordinal (ranks, Likert scale)?
+        ↓ YES
+    Use SPEARMAN or KENDALL
+
+Outliers present?
+        ↓ YES
+    Use SPEARMAN or KENDALL (robust)
+
+Small sample with many ties?
+        ↓ YES
+    Use KENDALL (most reliable)
+```
+
+---
 
 ### 8. Summary
 
@@ -1589,6 +1892,73 @@ $$F = \frac{s_1^2}{s_2^2} \sim F(n_1-1, n_2-1)$$
 ## Correlation ⭐
 
 $$r_{XY} = \frac{S_{XY}}{\sqrt{S_{XX} \cdot S_{YY}}}, \qquad r_s = 1 - \frac{6\sum d_i^2}{n(n^2-1)}$$
+
+## Expectation & Variance — Syllabus-Relevant Formulas
+
+### 1. Expectation Rules
+
+| Formula | Meaning |
+|---------|---------|
+| $E[c] = c$ | Expected value of a constant is itself |
+| $E[aX] = aE[X]$ | Constants factor out |
+| $E[X + Y] = E[X] + E[Y]$ | Always additive — no conditions needed |
+| $E[aX + b] = aE[X] + b$ | Full linear transformation |
+| $E[XY] = E[X]E[Y]$ | **Only if X, Y independent** |
+| $E[X^2] = \text{Var}(X) + (E[X])^2$ | Most used formula — connects expectation and variance ⭐ |
+
+---
+
+### 2. Variance Rules
+
+| Formula | Meaning |
+|---------|---------|
+| $\text{Var}(X) = E[X^2] - (E[X])^2$ | **Definition** — most used ⭐ |
+| $\text{Var}(c) = 0$ | Constants have no spread |
+| $\text{Var}(aX) = a^2\text{Var}(X)$ | Scaling squares the variance |
+| $\text{Var}(X + c) = \text{Var}(X)$ | Shifting has no effect |
+| $\text{Var}(aX + b) = a^2\text{Var}(X)$ | $b$ vanishes, $a$ gets squared |
+| $\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$ | **Only if independent** |
+| $\text{Var}(X - Y) = \text{Var}(X) + \text{Var}(Y)$ | **Only if independent** — note still $+$ not $-$ ⭐ |
+
+---
+
+### 3. Standard Deviation Rules
+
+| Formula | Meaning |
+|---------|---------|
+| $\text{SD}(X) = \sqrt{\text{Var}(X)}$ | Definition |
+| $\text{SD}(aX) = \|a\| \cdot \text{SD}(X)$ | Absolute value of $a$ — NOT $a^2$ ⭐ |
+| $\text{SD}(X + c) = \text{SD}(X)$ | Shift has no effect |
+| $\text{SD}(aX + b) = \|a\| \cdot \text{SD}(X)$ | $b$ vanishes, $a$ comes out with $|\cdot|$ |
+
+---
+
+### 4. Correlation (for P&S and Basic ML)
+
+| Formula | Meaning |
+|---------|---------|
+| $r = \frac{S_{XY}}{\sqrt{S_{XX} \cdot S_{YY}}}$ | Pearson correlation ⭐ |
+| $-1 \leq r \leq +1$ | Always bounded — NEVER outside this range ⭐ |
+| $r_{XY}^2 = R^2$ | For simple linear regression only ⭐ |
+| $r_s = 1 - \frac{6\sum d_i^2}{n(n^2-1)}$ | Spearman rank correlation ⭐ |
+
+---
+
+### 5. Key Distributions
+
+### 5. Key Distributions
+
+| Distribution | E[X] | Var(X) |
+|-------------|--------|-----------------|
+| Bernoulli(p) | p | p(1−p) |
+| Binomial(n,p) | np | np(1−p) |
+| Uniform(a,b) | (a+b)/2 | (b−a)²/12 |
+| Normal(μ, σ²) | μ | σ² |
+---
+
+### 6. Jensen's Inequality (for Optimization)
+
+$$f(E[X]) \leq E[f(X)] \quad \text{when } f \text{ is convex}$$
 
 ---
 

@@ -374,7 +374,9 @@ Three dice are rolled simultaneously. Find the probability that exactly two dice
 **Method:** (Total − all same − all different) ... but let's count directly.
 
 Choose which number appears twice: 6 ways
+
 Choose which 2 dice show that number: ${}^3C_2 = 3$ ways
+
 The remaining die shows a different number: 5 ways
 
 $$\text{Favourable} = 6 \times 3 \times 5 = 90$$
